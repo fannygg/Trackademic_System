@@ -57,7 +57,7 @@ pip install -r requirements.txt
 #### Oracle
 Configura tu archivo `settings.py`:
 
-####MongoDB
+###MongoDB
 Crea un archivo `.env` con tu URI de MongoDB Atlas:
 
 Y conéctalo desde Django usando `pymongo`:
