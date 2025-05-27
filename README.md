@@ -6,7 +6,6 @@
 * Oscar Suarez
 * Maria Fanny Giraldo 
 
-
 ---
 
 ## Descripción general
@@ -53,15 +52,16 @@
 ### 1. Clonar repositorio
 
 ```bash
-git clone https://github.com/tu-usuario/trackademic.git
-cd trackademic
+git clone https://github.com/fannygg/System_Trackademic.git
+cd System_Trackademic
 ```
 
 ### 2. Crear entorno virtual e instalar dependencias
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # o venv\Scripts\activate en Windows
+source venv/bin/activate  # Linux
+venv\Scripts\activate # Windows
 pip install -r requirements.txt
 ```
 ---
