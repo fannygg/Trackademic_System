@@ -118,13 +118,3 @@ python manage.py runserver
 * Escalabilidad horizontal.
 * Integración con plataformas modernas.
 * MongoDB Atlas ofrece infraestructura gestionada y segura.
-
----
-
-## Conclusión
-
-La combinación de PostgreSQL (Supabase) con Transaction Pooler para datos estructurados y MongoDB Atlas para datos colaborativos y dinámicos permite:
-
-* Consistencia y estructura para datos estables.
-* Flexibilidad y escalabilidad para datos variables.
-* Desarrollo ágil y mantenimiento simplificado.
