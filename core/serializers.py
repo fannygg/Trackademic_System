@@ -13,7 +13,6 @@ class RegisterSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        print("Validated data:", validated_data)
         codigo = validated_data.pop('codigo')
         user = User.objects.create_user(
             username=validated_data['username'],

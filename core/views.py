@@ -6,6 +6,10 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.views import APIView
 from .serializers import RegisterSerializer
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
+from django.contrib.auth import login
+
+
 
 
 def register(request):
@@ -35,3 +39,31 @@ class RegisterView(APIView):
             serializer.save()
             return Response({'message': 'Usuario registrado correctamente'}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+    
+# HTML
+
+def landing_page(request):
+    return render(request, 'landing.html')  
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('landing') 
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+def register_view(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect('landing')
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form}) 

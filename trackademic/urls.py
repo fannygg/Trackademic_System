@@ -16,10 +16,15 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from core.views import landing_page
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/core/', include('core.urls')),   
     path('api/notas/', include('notas.urls')), 
+    # HTML
+    path('', landing_page, name='landing'),
+
 ]
 
