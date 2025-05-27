@@ -359,7 +359,7 @@
         <div class="error-message" id="errorMessage" role="alert"></div>
         <div class="success-message" id="successMessage" role="status"></div>
 
-        <form method="post" action="{% url 'custom_login' %}" id="loginForm" novalidate>
+        <form method="post" action="{% url 'login' %}" id="loginForm" novalidate>
             {% csrf_token %}
             
             <div class="form-group">

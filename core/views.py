@@ -8,6 +8,8 @@ from rest_framework.views import APIView
 from .serializers import RegisterSerializer
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login
+from django.contrib.auth.decorators import login_required
+
 
 
 
@@ -32,6 +34,7 @@ class CustomAuthToken(ObtainAuthToken):
         token = AuthToken.objects.get(key=token_key)
         return Response({'token': token.key, 'user_id': token.user_id, 'username': token.user.username})
 
+
 class RegisterView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
@@ -52,7 +55,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('landing') 
+            return redirect('home') 
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
@@ -67,3 +70,18 @@ def register_view(request):
     else:
         form = UserCreationForm()
     return render(request, 'register.html', {'form': form}) 
+
+@login_required
+def home(request):
+    funcionalidades = [
+        {'nombre': 'Ingresar notas', 'url': '#'},
+        {'nombre': 'Ver consolidado de notas', 'url': '#'},
+        {'nombre': 'Plan de evaluación', 'url': '#'},
+        {'nombre': 'Comentarios y colaboraciones', 'url': '#'},
+    ]
+    return render(request, 'home.html', {'funcionalidades': funcionalidades})
+
+@login_required
+def profile(request):
+    # Mostrar datos del usuario para gestión de cuenta (puedes extender con edición)
+    return render(request, 'profile.html', {'user': request.user})

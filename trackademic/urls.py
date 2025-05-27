@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from core.views import landing_page
-
+from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +25,8 @@ urlpatterns = [
     path('api/notas/', include('notas.urls')), 
     # HTML
     path('', landing_page, name='landing'),
+    path('perfil/', views.profile, name='profile'),
+
 
 ]
 

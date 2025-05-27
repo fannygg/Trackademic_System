@@ -19,3 +19,4 @@ class RegisterForm(forms.ModelForm):
             user.profile.save()
 
         return user
+    
