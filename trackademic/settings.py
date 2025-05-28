@@ -11,6 +11,16 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from pymongo import MongoClient
+
+# MongoDB Atlas connection
+MONGO_URI = "mongodb+srv://trackademic_user:k7gi34Yk0eHmfS4S@cluster0.fo0dqxz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
+MONGO_DB_NAME = "trackademic"
+
+# Cliente pymongo global
+mongo_client = MongoClient(MONGO_URI)
+mongo_db = mongo_client[MONGO_DB_NAME]
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
