@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "student_id": {
+      "type": "string"
+    },
+    "target_student_id": {
+      "type": "string"
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "subject_code": {
+          "type": "string"
+        },
+        "group_number": {
+          "type": "integer"
+        },
+        "semester": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "group_number",
+        "semester",
+        "subject_code"
+      ]
+    },
+    "comment": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "comment",
+    "created_at",
+    "group",
+    "student_id",
+    "target_student_id"
+  ]
+}

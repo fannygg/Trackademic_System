@@ -1,0 +1,51 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "student_id": {
+      "type": "string"
+    },
+    "group": {
+      "type": "object",
+      "properties": {
+        "subject_code": {
+          "type": "string"
+        },
+        "group_number": {
+          "type": "integer"
+        },
+        "semester": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "group_number",
+        "semester",
+        "subject_code"
+      ]
+    },
+    "grades": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "activity": {
+            "type": "string"
+          },
+          "grade": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "activity",
+          "grade"
+        ]
+      }
+    }
+  },
+  "required": [
+    "grades",
+    "group",
+    "student_id"
+  ]
+}

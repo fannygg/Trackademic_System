@@ -590,7 +590,7 @@
 
             <div class="header-actions">
                 {% if can_edit_plan %}
-                <a href="{% url 'edit_evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
+                <a href="{% url 'notas:edit_evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
                    class="action-button">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
@@ -601,7 +601,7 @@
                 {% endif %}
 
                 {% if not evaluation_plan %}
-                <a href="{% url 'create_evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
+                <a href="{% url 'notas:create_evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
                    class="action-button">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2v20m8-10H4"/>
@@ -610,7 +610,7 @@
                 </a>
                 {% endif %}
 
-                <a href="{% url 'subjects' %}" class="back-button">
+                <a href="{% url 'core:subjects' %}" class="back-button">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="m12 19-7-7 7-7"/>
                         <path d="M19 12H5"/>
@@ -703,7 +703,7 @@
                         Actividades de Evaluación
                     </h2>
                     {% if can_edit_plan %}
-                    <a href="{% url 'add_activity' subject_code=subject_code group_number=group_number semester=semester %}" 
+                    <a href="{% url 'notas:add_activity' subject_code=subject_code group_number=group_number semester=semester %}" 
                        class="action-button">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M12 2v20m8-10H4"/>
@@ -745,7 +745,7 @@
                     
                             {% if can_edit_plan %}
                             <td data-label="Acciones" class="actions-cell">
-                                <a href="{% url 'edit_activity' activity_id=activity.id %}" 
+                                <a href="{% url 'notas:edit_activity' subject_code=subject_code group_number=group_number semester=semester activity_id=forloop.counter0 %}" 
                                    class="table-action btn-edit">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
@@ -753,7 +753,7 @@
                                     </svg>
                                     Editar
                                 </a>
-                                <a href="{% url 'delete_activity' activity_id=activity.id %}" 
+                                <a href="{% url 'notas:delete_activity' subject_code=subject_code group_number=group_number semester=semester activity_index=forloop.counter0 %}" 
                                    class="table-action btn-delete"
                                    onclick="return confirm('¿Estás seguro de eliminar esta actividad?')">
                                     <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -780,7 +780,7 @@
                     <h3>No hay actividades definidas</h3>
                     <p>Este plan de evaluación aún no tiene actividades configuradas.</p>
                     {% if can_edit_plan %}
-                    <a href="{% url 'add_activity' subject_code=subject_code group_number=group_number semester=semester %}" 
+                    <a href="{% url 'notas:add_activity' subject_code=subject_code group_number=group_number semester=semester %}" 
                        class="action-button" style="margin-top: 1rem; display: inline-flex;">
                         Agregar Primera Actividad
                     </a>
@@ -838,7 +838,7 @@
                 </div>
                 <h2>No hay plan de evaluación definido</h2>
                 <p>Este grupo aún no tiene un plan de evaluación configurado. Puedes crear uno para ayudar a la comunidad.</p>
-                <a href="{% url 'create_evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
+                <a href="{% url 'notas:create_evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
                    class="action-button" style="margin-top: 1.5rem; display: inline-flex;">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2v20m8-10H4"/>

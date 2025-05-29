@@ -376,7 +376,10 @@
                     <div class="user-name">{{ user.first_name }} {{ user.last_name }}</div>
                     <div class="user-role">Estudiante</div>
                 </div>
-                <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
+                <form method="post" action="{% url 'core:logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="logout-btn">Cerrar sesión</button>
+                </form>
             </div>
         </div>
     </header>
@@ -419,7 +422,7 @@
                     Cursos y Materias
                 </h2>
                 <div class="function-links">
-                    <a href="{% url 'subjects' %}" class="function-link">
+                    <a href="{% url 'core:subjects' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Ver Cursos por Semestre</div>
                             <div class="link-description">Explora materias disponibles por grupo y profesor</div>
@@ -428,7 +431,7 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
-                    <a href="{% url 'my_courses' %}" class="function-link">
+                    <a href="{% url 'core:my_courses' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Mis Cursos Inscritos</div>
                             <div class="link-description">Gestiona tus materias del semestre actual</div>
@@ -437,7 +440,7 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
-                    <a href="{% url 'enroll_courses' %}" class="function-link">
+                    <a href="{% url 'core:enroll_courses' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Inscribir Materias</div>
                             <div class="link-description">Inscríbete a nuevos cursos y grupos</div>
@@ -461,7 +464,7 @@
                     Gestión de Notas
                 </h2>
                 <div class="function-links">
-                    <a href="{% url 'grades' %}" class="function-link">
+                    <a href="{% url 'core:grades' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Ver Mis Notas</div>
                             <div class="link-description">Consulta todas tus calificaciones</div>
@@ -470,7 +473,7 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
-                    <a href="{% url 'add_grade' %}" class="function-link">
+                    <a href="{% url 'core:add_grade' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Registrar Nueva Nota</div>
                             <div class="link-description">Ingresa calificaciones de actividades</div>
@@ -479,7 +482,7 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
-                    <a href="{% url 'semester_report' %}" class="function-link">
+                    <a href="{% url 'core:semester_report' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Consolidado por Semestre</div>
                             <div class="link-description">Resumen de promedios y rendimiento</div>
@@ -504,7 +507,7 @@
                     Planes de Evaluación
                 </h2>
                 <div class="function-links">
-                    <a href="{% url 'evaluation_plans' %}" class="function-link">
+                    <a href="{% url 'core:subjects' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Ver Planes de Evaluación</div>
                             <div class="link-description">Consulta actividades y porcentajes</div>
@@ -513,7 +516,7 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
-                    <a href="{% url 'create_plan' %}" class="function-link">
+                    <a href="{% url 'core:create_plan' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Crear Plan de Evaluación</div>
                             <div class="link-description">Define actividades para un curso</div>
@@ -522,7 +525,7 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
-                    <a href="{% url 'collaborative_plans' %}" class="function-link">
+                    <a href="{% url 'core:collaborative_plans' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Planes Colaborativos</div>
                             <div class="link-description">Comenta y colabora con otros estudiantes</div>
@@ -548,7 +551,7 @@
                     Informes de Valor
                 </h2>
                 <div class="function-links">
-                    <a href="{% url 'grade_calculator' %}" class="function-link">
+                    <a href="{% url 'core:grade_calculator' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Calculadora de Notas</div>
                             <div class="link-description">¿Qué nota necesitas para aprobar?</div>
@@ -557,7 +560,7 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
-                    <a href="{% url 'performance_analysis' %}" class="function-link">
+                    <a href="{% url 'core:performance_analysis' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Análisis de Rendimiento</div>
                             <div class="link-description">¿En qué actividades tienes peor rendimiento?</div>
@@ -566,7 +569,7 @@
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
-                    <a href="{% url 'evolution_report' %}" class="function-link">
+                    <a href="{% url 'core:evolution_report' %}" class="function-link">
                         <div class="link-info">
                             <div class="link-title">Evolución Académica</div>
                             <div class="link-description">Tu progreso por semestre y curso</div>
@@ -590,7 +593,7 @@
                 Acciones Rápidas
             </h2>
             <div class="actions-grid">
-                <a href="{% url 'add_grade' %}" class="action-button">
+                <a href="{% url 'core:add_grade' %}" class="action-button">
                     <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M12 2v20m8-10H4"/>
                     </svg>
@@ -600,7 +603,7 @@
                     </div>
                 </a>
 
-                <a href="{% url 'grade_calculator' %}" class="action-button">
+                <a href="{% url 'core:grade_calculator' %}" class="action-button">
                     <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <rect x="4" y="2" width="16" height="20" rx="2"/>
                         <line x1="8" y1="6" x2="16" y2="6"/>
@@ -613,7 +616,7 @@
                     </div>
                 </a>
 
-                <a href="{% url 'profile' %}" class="action-button secondary">
+                <a href="{% url 'core:profile' %}" class="action-button secondary">
                     <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
                         <circle cx="12" cy="7" r="4"/>
@@ -624,7 +627,7 @@
                     </div>
                 </a>
 
-                <a href="{% url 'help' %}" class="action-button secondary">
+                <a href="{% url 'core:help' %}" class="action-button secondary">
                     <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="10"/>
                         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>

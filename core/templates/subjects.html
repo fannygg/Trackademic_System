@@ -604,7 +604,7 @@
                 <span class="logo-text">Trackademic</span>
             </div>
 
-            <a href="{% url 'home' %}" class="back-button">
+            <a href="{% url 'core:home' %}" class="back-button">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="m12 19-7-7 7-7"/>
                     <path d="M19 12H5"/>
@@ -644,7 +644,7 @@
 
         <!-- Filters -->
         <div class="filters-section">
-            <form method="get" action="{% url 'subjects' %}" class="filters-form" id="filtersForm">
+            <form method="get" action="{% url 'core:subjects' %}" class="filters-form" id="filtersForm">
                 <div class="filter-group">
                     <label class="filter-label">Semestre</label>
                     <select class="filter-select" name="semester" onchange="this.form.submit()">
@@ -699,7 +699,7 @@
                 </div>
 
                 <div class="filter-group">
-                    <a href="{% url 'subjects' %}" class="filter-button clear-button">
+                    <a href="{% url 'core:subjects' %}" class="filter-button clear-button">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M3 6h18"/>
                             <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
@@ -789,7 +789,7 @@
                                         {% endif %}
 
                                         <!-- Action buttons -->
-                                        <a href="{% url 'notas:evaluation_plan_detail' subject_code=subject_data.subject.code group_number=group.number semester=semester %}" 
+                                        <a href="{% url 'notas:evaluation_plans_list' subject_code=subject_data.subject.code %}" 
                                            class="action-button btn-primary" onclick="event.stopPropagation()">
                                             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                 <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>

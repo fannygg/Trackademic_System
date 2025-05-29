@@ -1,0 +1,63 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": "object",
+  "properties": {
+    "group": {
+      "type": "object",
+      "properties": {
+        "subject_code": {
+          "type": "string"
+        },
+        "group_number": {
+          "type": "integer"
+        },
+        "semester": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "group_number",
+        "semester",
+        "subject_code"
+      ]
+    },
+    "activities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "percentage": {
+            "type": "integer"
+          },
+          "description": {
+            "type": "string"
+          },
+          "activity_type": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "description",
+          "name",
+          "percentage"
+        ]
+      }
+    },
+    "description": {
+      "type": "string"
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "activities",
+    "group"
+  ]
+}

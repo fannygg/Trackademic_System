@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Plan de Evaluación - {{ subject_code }} Grupo {{ group_number }} | Trackademic</title>
+    <title>Crear Plan de Evaluación - {{ subject_code }} Grupo {{ group_number }} | Trackademic</title>
     <style>
         * {
             margin: 0;
@@ -520,12 +520,12 @@
                 <span class="logo-text">Trackademic</span>
             </div>
 
-            <a href="{% url 'notas:evaluation_plan_detail' subject_code=subject_code group_number=group_number semester=semester %}" class="back-button">
+            <a href="{% url 'core:home' %}" class="back-button">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="m12 19-7-7 7-7"/>
                     <path d="M19 12H5"/>
                 </svg>
-                Volver al Plan
+                Volver al Dashboard
             </a>
         </div>
     </header>
@@ -541,27 +541,44 @@
                 <span class="breadcrumb-separator">›</span>
                 <a href="{% url 'notas:evaluation_plans_list' subject_code=subject_code %}">Planes de Evaluación</a>
                 <span class="breadcrumb-separator">›</span>
-                <a href="{% url 'notas:evaluation_plan_detail' subject_code=subject_code group_number=group_number semester=semester %}">Ver Plan</a>
-                <span class="breadcrumb-separator">›</span>
-                <span>Editar</span>
+                <span>Crear Plan</span>
             </nav>
 
-            <h1 class="page-title">Editar Plan de Evaluación</h1>
+            <h1 class="page-title">Crear Plan de Evaluación</h1>
             <div class="group-info">
                 {{ subject_code }} - Grupo {{ group_number }} - {{ semester }}
             </div>
             <p class="page-description">
-                Modifica las actividades de evaluación y sus porcentajes. 
-                Puedes hacer cambios parciales o completos. Asegúrate de que la suma de porcentajes sea exactamente 100%.
+                Define las actividades de evaluación y sus porcentajes para este grupo. 
+                Asegúrate de que la suma de porcentajes sea exactamente 100%.
             </p>
         </div>
 
         <!-- Messages -->
-        <div id="messages-container"></div>
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        {% if message.tags == 'error' %}
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="15" y1="9" x2="9" y2="15"/>
+                            <line x1="9" y1="9" x2="15" y2="15"/>
+                        {% elif message.tags == 'warning' %}
+                            <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                            <path d="M12 9v4"/>
+                            <path d="m12 17 .01 0"/>
+                        {% else %}
+                            <path d="M20 6 9 17l-5-5"/>
+                        {% endif %}
+                    </svg>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
 
         <!-- Form Container -->
         <div class="form-container">
-            <form id="evaluationPlanForm">
+            <form id="evaluationPlanForm" method="post">
                 {% csrf_token %}
                 
                 <!-- Plan Description -->
@@ -585,8 +602,8 @@
                             id="description" 
                             name="description" 
                             class="form-textarea"
-                            placeholder="Describe brevemente el enfoque y metodología de evaluación para este grupo..."
-                            rows="4">{{ evaluation_plan.description }}</textarea>
+                            placeholder="Describe brevemente el enfoque y metodología de evaluación para este grupo. Por ejemplo: criterios generales, tipo de evaluación, metodología del profesor, etc."
+                            rows="4"></textarea>
                         <div class="form-help">
                             Proporciona una descripción general que ayude a los estudiantes a entender el enfoque de evaluación.
                         </div>
@@ -619,80 +636,16 @@
                         </div>
 
                         <div id="activitiesContainer">
-                            {% if evaluation_plan.activities %}
-                                {% for activity in evaluation_plan.activities %}
-                                    <div class="activity-item" data-index="{{ forloop.counter0 }}">
-                                        <div class="activity-header">
-                                            <div class="activity-number">{{ forloop.counter }}</div>
-                                            <button type="button" class="activity-remove" onclick="removeActivity({{ forloop.counter0 }})">
-                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <path d="M18 6 6 18"/>
-                                                    <path d="m6 6 12 12"/>
-                                                </svg>
-                                            </button>
-                                        </div>
-                                        <div class="activity-form">
-                                            <div class="form-group">
-                                                <label class="form-label required">Nombre de la Actividad</label>
-                                                <input 
-                                                    type="text" 
-                                                    name="activity_name_{{ forloop.counter0 }}" 
-                                                    class="form-input activity-name"
-                                                    placeholder="Ej: Primer Parcial, Proyecto Final..."
-                                                    value="{{ activity.name }}"
-                                                    required>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label required">Tipo</label>
-                                                <select name="activity_type_{{ forloop.counter0 }}" class="form-select activity-type" required>
-                                                    <option value="">Seleccionar...</option>
-                                                    <option value="exam" {% if activity.activity_type == 'exam' %}selected{% endif %}>Examen</option>
-                                                    <option value="quiz" {% if activity.activity_type == 'quiz' %}selected{% endif %}>Quiz</option>
-                                                    <option value="project" {% if activity.activity_type == 'project' %}selected{% endif %}>Proyecto</option>
-                                                    <option value="homework" {% if activity.activity_type == 'homework' %}selected{% endif %}>Tarea</option>
-                                                    <option value="presentation" {% if activity.activity_type == 'presentation' %}selected{% endif %}>Presentación</option>
-                                                    <option value="lab" {% if activity.activity_type == 'lab' %}selected{% endif %}>Laboratorio</option>
-                                                    <option value="participation" {% if activity.activity_type == 'participation' %}selected{% endif %}>Participación</option>
-                                                    <option value="other" {% if activity.activity_type == 'other' %}selected{% endif %}>Otro</option>
-                                                </select>
-                                            </div>
-                                            <div class="form-group">
-                                                <label class="form-label required">Porcentaje (%)</label>
-                                                <input 
-                                                    type="number" 
-                                                    name="activity_percentage_{{ forloop.counter0 }}" 
-                                                    class="form-input activity-percentage"
-                                                    placeholder="0"
-                                                    min="1"
-                                                    max="100"
-                                                    step="1"
-                                                    value="{{ activity.percentage }}"
-                                                    required
-                                                    onchange="updatePercentages()">
-                                            </div>
-                                            <div class="form-group activity-form-full">
-                                                <label class="form-label">Descripción</label>
-                                                <textarea 
-                                                    name="activity_description_{{ forloop.counter0 }}" 
-                                                    class="form-textarea activity-description"
-                                                    placeholder="Describe los detalles de la actividad, criterios de evaluación, etc..."
-                                                    rows="2">{{ activity.description }}</textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                <div class="empty-activities">
-                                    <div class="empty-activities-icon">
-                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                            <path d="M9 11l3 3L22 4"/>
-                                            <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-                                        </svg>
-                                    </div>
-                                    <h3>No hay actividades agregadas</h3>
-                                    <p>Comienza agregando la primera actividad de evaluación.</p>
+                            <div class="empty-activities">
+                                <div class="empty-activities-icon">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                        <path d="M9 11l3 3L22 4"/>
+                                        <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+                                    </svg>
                                 </div>
-                            {% endif %}
+                                <h3>No hay actividades agregadas</h3>
+                                <p>Comienza agregando la primera actividad de evaluación.</p>
+                            </div>
                         </div>
 
                         <button type="button" id="addActivityBtn" class="btn btn-outline" style="margin-top: 1rem;">
@@ -706,26 +659,18 @@
 
                 <!-- Form Actions -->
                 <div class="form-actions">
-                    <a href="{% url 'notas:evaluation_plan_detail' subject_code=subject_code group_number=group_number semester=semester %}" class="btn btn-secondary">
+                    <a href="{% url 'notas:evaluation_plans_list' subject_code=subject_code %}" class="btn btn-secondary">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M18 6 6 18"/>
                             <path d="m6 6 12 12"/>
                         </svg>
                         Cancelar
                     </a>
-                    <button type="button" id="savePartialBtn" class="btn btn-outline">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
-                            <polyline points="17,21 17,13 7,13 7,21"/>
-                            <polyline points="7,3 7,8 15,8"/>
-                        </svg>
-                        Guardar Parcial
-                    </button>
                     <button type="submit" id="submitBtn" class="btn btn-primary">
                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M20 6 9 17l-5-5"/>
                         </svg>
-                        Guardar Completo
+                        Crear Plan de Evaluación
                     </button>
                 </div>
             </form>
@@ -733,7 +678,8 @@
     </div>
 
     <script>
-        let activityCounter = {{ evaluation_plan.activities|length|default:0 }};
+        let activityCounter = 0;
+        let activities = [];
 
         // Activity template
         function createActivityHTML(index) {
@@ -874,31 +820,27 @@
             }
         }
 
-        // Show message
-        function showMessage(message, type = 'success') {
-            const container = document.getElementById('messages-container');
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type}`;
+        // Form submission
+        document.getElementById('evaluationPlanForm').addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            const icon = type === 'error' ? 
-                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>' :
-                '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6 9 17l-5-5"/></svg>';
+            // Validate percentages
+            const totalPercentage = parseInt(document.getElementById('totalPercentage').textContent);
+            if (totalPercentage !== 100) {
+                alert('El total de porcentajes debe ser exactamente 100%. Actualmente es: ' + totalPercentage + '%');
+                return;
+            }
             
-            alertDiv.innerHTML = `${icon} ${message}`;
-            container.appendChild(alertDiv);
-            
-            // Auto remove after 5 seconds
-            setTimeout(() => {
-                alertDiv.remove();
-            }, 5000);
-        }
-
-        // Collect activities data
-        function collectActivities() {
-            const activities = [];
+            // Validate at least one activity
             const activityItems = document.querySelectorAll('.activity-item');
+            if (activityItems.length === 0) {
+                alert('Debe agregar al menos una actividad de evaluación.');
+                return;
+            }
             
-            activityItems.forEach((item) => {
+            // Collect activities data
+            const activities = [];
+            activityItems.forEach((item, index) => {
                 const actualIndex = item.getAttribute('data-index');
                 const name = item.querySelector(`[name="activity_name_${actualIndex}"]`).value;
                 const type = item.querySelector(`[name="activity_type_${actualIndex}"]`).value;
@@ -915,106 +857,41 @@
                 }
             });
             
-            return activities;
-        }
-
-        // Submit function
-        function submitForm(isPatch = false) {
-            const activities = collectActivities();
-            const description = document.getElementById('description').value;
+            // Prepare form data
+            const formData = new FormData();
+            formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+            formData.append('description', document.getElementById('description').value);
+            formData.append('activities', JSON.stringify(activities));
             
-            // Validations for complete save
-            if (!isPatch) {
-                const totalPercentage = parseInt(document.getElementById('totalPercentage').textContent);
-                if (totalPercentage !== 100) {
-                    showMessage('El total de porcentajes debe ser exactamente 100%. Actualmente es: ' + totalPercentage + '%', 'error');
-                    return;
-                }
-                
-                if (activities.length === 0) {
-                    showMessage('Debe tener al menos una actividad de evaluación.', 'error');
-                    return;
-                }
-            }
-            
-            // Prepare data
-            const data = {};
-            if (description !== '{{ evaluation_plan.description }}') {
-                data.description = description;
-            }
-            if (activities.length > 0) {
-                data.activities = activities;
-            }
-            
-            if (Object.keys(data).length === 0) {
-                showMessage('No hay cambios para guardar.', 'warning');
-                return;
-            }
-            
-            // Disable buttons
+            // Disable submit button
             const submitBtn = document.getElementById('submitBtn');
-            const savePartialBtn = document.getElementById('savePartialBtn');
-            const originalSubmitText = submitBtn.innerHTML;
-            const originalPartialText = savePartialBtn.innerHTML;
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Creando Plan...';
+            submitBtn.disabled = true;
             
-            if (isPatch) {
-                savePartialBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Guardando...';
-                savePartialBtn.disabled = true;
-            } else {
-                submitBtn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.219-8.56"/></svg> Guardando...';
-                submitBtn.disabled = true;
-            }
-            
-            // Submit request
+            // Submit form
             fetch(window.location.href, {
-                method: isPatch ? 'PATCH' : 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,
-                    'X-HTTP-Method-Override': isPatch ? 'PATCH' : 'POST'
-                },
-                body: JSON.stringify(data)
+                method: 'POST',
+                body: formData
             })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    showMessage(data.message, 'success');
-                    if (!isPatch) {
-                        setTimeout(() => {
-                            window.location.href = `{% url 'notas:evaluation_plan_detail' subject_code=subject_code group_number=group_number semester=semester %}`;
-                        }, 1500);
-                    }
+            .then(response => {
+                if (response.ok) {
+                    window.location.href = `{% url 'notas:evaluation_plans_list' subject_code=subject_code %}`;
                 } else {
-                    showMessage(data.error, 'error');
+                    throw new Error('Error al crear el plan');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                showMessage('Error al actualizar el plan de evaluación', 'error');
-            })
-            .finally(() => {
-                // Restore buttons
-                submitBtn.innerHTML = originalSubmitText;
+                alert('Error al crear el plan de evaluación');
+                submitBtn.innerHTML = originalText;
                 submitBtn.disabled = false;
-                savePartialBtn.innerHTML = originalPartialText;
-                savePartialBtn.disabled = false;
             });
-        }
-
-        // Form submission handlers
-        document.getElementById('evaluationPlanForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            submitForm(false); // Complete save
         });
 
-        document.getElementById('savePartialBtn').addEventListener('click', function(e) {
-            e.preventDefault();
-            submitForm(true); // Partial save
-        });
-
-        // Initialize percentages on load
+        // Add first activity automatically
         document.addEventListener('DOMContentLoaded', function() {
-            updatePercentages();
+            document.getElementById('addActivityBtn').click();
         });
     </script>
 </body>

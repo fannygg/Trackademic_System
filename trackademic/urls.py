@@ -21,7 +21,7 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/core/', include('core.urls')),   
+    path('api/core/', include(('core.urls', 'core'), namespace='core')),   
     path('api/notas/', include(('notas.urls', 'notas'), namespace='notas')),
     # HTML
     path('', landing_page, name='landing'),
