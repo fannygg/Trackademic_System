@@ -10,7 +10,7 @@ urlpatterns = [
     path('api/register/', RegisterView.as_view(), name='register_api'),
     path('api/login/', CustomAuthToken.as_view(), name='custom_login'),
     # Frontend HTML views
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('login/', login_view, name='login'),
     path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('register/', register_view, name='register'),
     path('profile/', login_view, name='profile'),  
