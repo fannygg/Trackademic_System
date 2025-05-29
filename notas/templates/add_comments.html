@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Comentario - Trackademic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 70px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        /* Plan Info */
+        .plan-info {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .plan-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .plan-details {
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        /* Guidelines */
+        .guidelines {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 2rem;
+        }
+
+        .guidelines-title {
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .guidelines-list {
+            list-style: none;
+            color: #1e40af;
+        }
+
+        .guidelines-list li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .guidelines-list li::before {
+            content: '✓';
+            color: #10b981;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        /* Form Container */
+        .form-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .form-label.required::after {
+            content: ' *';
+            color: #ef4444;
+        }
+
+        .form-textarea {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            resize: vertical;
+            min-height: 150px;
+            line-height: 1.5;
+        }
+
+        .form-textarea:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-help {
+            font-size: 0.8rem;
+            color: #6b7280;
+            margin-top: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .char-counter {
+            font-weight: 500;
+        }
+
+        .char-counter.warning {
+            color: #f59e0b;
+        }
+
+        .char-counter.error {
+            color: #ef4444;
+        }
+
+        /* Form Actions */
+        .form-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #4b5563;
+        }
+
+        /* Recent Comments */
+        .recent-comments {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .comments-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .comment-item {
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f9fafb;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .comment-date {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .comment-text {
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        .no-comments {
+            text-align: center;
+            color: #6b7280;
+            font-style: italic;
+            padding: 2rem;
+        }
+
+        /* Messages */
+        .error-message {
+            background: #fee2e2;
+            color: #991b1b;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .success-message {
+            background: #d1fae5;
+            color: #065f46;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .field-error {
+            color: #ef4444;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .form-textarea.error {
+            border-color: #ef4444;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .form-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                justify-content: center;
+            }
+
+            .form-help {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.25rem;
+            }
+        }
+
+        /* Loading State */
+        .btn.loading {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn.loading::after {
+            content: '';
+            width: 16px;
+            height: 16px;
+            border: 2px solid transparent;
+            border-top: 2px solid currentColor;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-left: 8px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">T</div>
+                <span class="logo-text">Trackademic</span>
+            </div>
+
+            <a href="{% url 'evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" class="back-button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m12 19-7-7 7-7"/>
+                    <path d="M19 12H5"/>
+                </svg>
+                Volver al Plan
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Agregar Comentario</h1>
+            <p class="page-subtitle">Comparte tu experiencia y ayuda a otros estudiantes</p>
+        </div>
+
+        <!-- Plan Info -->
+        <div class="plan-info">
+            <div class="plan-name">{{ evaluation_plan.group.subject_code.name }}</div>
+            <div class="plan-details">
+                {{ subject_code }} • Grupo {{ group_number }} • {{ semester }} • 
+                Prof. {{ evaluation_plan.group.professor.first_name }} {{ evaluation_plan.group.professor.last_name }}
+            </div>
+        </div>
+
+        <!-- Guidelines -->
+        <div class="guidelines">
+            <div class="guidelines-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 11H1v3h8v3l3-4-3-4v2z"/>
+                    <path d="M22 12h-6"/>
+                </svg>
+                Pautas para comentarios constructivos
+            </div>
+            <ul class="guidelines-list">
+                <li>Comparte información útil sobre las actividades y su dificultad</li>
+                <li>Menciona consejos específicos para prepararse mejor</li>
+                <li>Sé respetuoso con el profesor y otros estudiantes</li>
+                <li>Evita comentarios ofensivos o información personal</li>
+                <li>Enfócate en aspectos académicos y metodológicos</li>
+            </ul>
+        </div>
+
+        <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div class="{% if message.tags == 'error' %}error-message{% else %}success-message{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Form -->
+        <div class="form-container">
+ form method="post" id="commentForm">
+    {% csrf_token %}
+    
+    <div class="form-group">
+        <label for="text" class="form-label required">Tu Comentario</label>
+        <textarea 
+            id="text" 
+            name="text" 
+            class="form-textarea"
+            placeholder="Comparte tu experiencia con este plan de evaluación. Por ejemplo: dificultad de las actividades, consejos para prepararse, metodología del profesor, etc..."
+            maxlength="1000"
+            required></textarea>
+        <div class="form-help">
+            <span>Comparte información útil y constructiva</span>
+            <span class="char-counter" id="charCounter">0 / 1000</span>
+        </div>
+    </div>
+
+    <div class="form-actions">
+        <a href="{% url 'evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
+           class="btn btn-secondary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 6 6 18"/>
+                <path d="m6 6 12 12"/>
+            </svg>
+            Cancelar
+        </a>
+        <button type="submit" class="btn btn-primary" id="submitBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 6 9 17l-5-5"/>
+            </svg>
+            Publicar Comentario
+        </button>
+    </div>
+</form>>
+        </div>
+
+        <!-- Recent Comments -->
+        {% if recent_comments %}
+        <div class="recent-comments">
+            <h2 class="comments-title">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                </svg>
+                Comentarios Recientes
+            </h2>
+            
+            {% for comment in recent_comments %}
+            <div class="comment-item">
+                <div class="comment-header">
+                    <span class="comment-author">{{ comment.author.first_name }} {{ comment.author.last_name }}</span>
+                    <span class="comment-date">{{ comment.created_at|date:"d/m/Y H:i" }}</span>
+                </div>
+                <div class="comment-text">{{ comment.text }}</div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const textarea = document.getElementById('text');
+            const charCounter = document.getElementById('charCounter');
+            const submitBtn = document.getElementById('submitBtn');
+            const maxLength = 1000;
+
+            // Character counter
+            function updateCharCounter() {
+                const length = textarea.value.length;
+                charCounter.textContent = `${length} / ${maxLength}`;
+                
+                if (length > maxLength * 0.9) {
+                    charCounter.classList.add('warning');
+                } else {
+                    charCounter.classList.remove('warning');
+                }
+                
+                if (length > maxLength) {
+                    charCounter.classList.add('error');
+                    submitBtn.disabled = true;
+                } else {
+                    charCounter.classList.remove('error');
+                    submitBtn.disabled = false;
+                }
+            }
+
+            textarea.addEventListener('input', updateCharCounter);
+            updateCharCounter(); // Initial call
+
+            // Auto-resize textarea
+            textarea.addEventListener('input', function() {
+                this.style.height = 'auto';
+                this.style.height = this.scrollHeight + 'px';
+            });
+
+            // Form submission
+            document.getElementById('commentForm').addEventListener('submit', function(e) {
+                const text = textarea.value.trim();
+                
+                if (text.length < 10) {
+                    e.preventDefault();
+                    alert('El comentario debe tener al menos 10 caracteres');
+                    return false;
+                }
+
+                if (text.length > maxLength) {
+                    e.preventDefault();
+                    alert('El comentario excede el límite de caracteres');
+                    return false;
+                }
+
+                // Add loading state
+                submitBtn.classList.add('loading');
+                submitBtn.disabled = true;
+            });
+
+            // Initial textarea resize
+            textarea.style.height = textarea.scrollHeight + 'px';
+        });
+    </script>
+</body>
+</html>

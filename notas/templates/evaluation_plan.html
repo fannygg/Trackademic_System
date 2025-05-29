@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan de Evaluación - Trackademic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 70px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        .action-button {
+            padding: 10px 16px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .action-button.secondary {
+            background: #6b7280;
+        }
+
+        .action-button.secondary:hover {
+            background: #4b5563;
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Course Header */
+        .course-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .course-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+
+        .course-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .course-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .course-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .detail-item {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+
+        .detail-label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-bottom: 0.25rem;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Plan Status */
+        .plan-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .status-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #10b981;
+        }
+
+        .status-indicator.warning {
+            background: #f59e0b;
+        }
+
+        .status-indicator.error {
+            background: #ef4444;
+        }
+
+        .status-text {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .percentage-total {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .percentage-valid {
+            color: #10b981;
+        }
+
+        .percentage-invalid {
+            color: #ef4444;
+        }
+
+        /* Activities Section */
+        .activities-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 35px;
+            height: 35px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Activities Table */
+        .activities-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .activities-table th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .activities-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #f3f4f6;
+            vertical-align: top;
+        }
+
+        .activities-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .activities-table tr:hover {
+            background: #f9fafb;
+        }
+
+        .activity-name {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-type {
+            font-size: 0.8rem;
+            color: #6b7280;
+            background: #f3f4f6;
+            padding: 2px 8px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .activity-description {
+            color: #4b5563;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+
+        .percentage-cell {
+            text-align: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .percentage-high {
+            color: #dc2626;
+        }
+
+        .percentage-medium {
+            color: #f59e0b;
+        }
+
+        .percentage-low {
+            color: #10b981;
+        }
+
+        .date-cell {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .actions-cell {
+            text-align: center;
+        }
+
+        .table-action {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin: 0 2px;
+        }
+
+        .btn-edit {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-comment {
+            background: #6b7280;
+            color: white;
+        }
+
+        .table-action:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: #667eea;
+        }
+
+        /* Comments Section */
+        .comments-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .comment-item {
+            border-left: 4px solid #667eea;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            background: #f9fafb;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .comment-author {
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .comment-date {
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .comment-text {
+            color: #4b5563;
+            line-height: 1.5;
+        }
+
+        /* Summary Cards */
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .summary-number {
+            font-size: 2rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .summary-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                padding: 1rem;
+            }
+
+            .activities-table {
+                font-size: 0.85rem;
+            }
+
+            .activities-table th,
+            .activities-table td {
+                padding: 0.75rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .course-title {
+                font-size: 1.5rem;
+            }
+
+            .course-details {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-status {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .header-actions {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            /* Mobile table */
+            .activities-table,
+            .activities-table thead,
+            .activities-table tbody,
+            .activities-table th,
+            .activities-table td,
+            .activities-table tr {
+                display: block;
+            }
+
+            .activities-table thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+
+            .activities-table tr {
+                border: 1px solid #e5e7eb;
+                border-radius: 8px;
+                margin-bottom: 1rem;
+                padding: 1rem;
+                background: white;
+            }
+
+            .activities-table td {
+                border: none;
+                position: relative;
+                padding: 0.5rem 0;
+            }
+
+            .activities-table td:before {
+                content: attr(data-label) ": ";
+                font-weight: 600;
+                color: #6b7280;
+                display: inline-block;
+                width: 100px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .activities-section {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">T</div>
+                <span class="logo-text">Trackademic</span>
+            </div>
+
+            <div class="header-actions">
+                {% if can_edit_plan %}
+                <a href="{% url 'edit_evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
+                   class="action-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                    </svg>
+                    Editar Plan
+                </a>
+                {% endif %}
+
+                {% if not evaluation_plan %}
+                <a href="{% url 'create_evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
+                   class="action-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20m8-10H4"/>
+                    </svg>
+                    Crear Plan
+                </a>
+                {% endif %}
+
+                <a href="{% url 'subjects' %}" class="back-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m12 19-7-7 7-7"/>
+                        <path d="M19 12H5"/>
+                    </svg>
+                    Volver a Materias
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Course Header -->
+        <div class="course-header">
+            <div class="course-content">
+                <h1 class="course-title">{{ group.subject_code.name }}</h1>
+                <div class="course-details">
+                    <div class="detail-item">
+                        <div class="detail-label">Código</div>
+                        <div class="detail-value">{{ subject_code }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Grupo</div>
+                        <div class="detail-value">{{ group_number }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Semestre</div>
+                        <div class="detail-value">{{ semester }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Profesor</div>
+                        <div class="detail-value">{{ professor.first_name }} {{ professor.last_name }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Área</div>
+                        <div class="detail-value">{{ group.subject_code.program_code.area_code.name }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% if evaluation_plan %}
+            <!-- Plan Status -->
+            <div class="plan-status">
+                <div class="status-info">
+                    <div class="status-indicator {% if total_percentage == 100 %}{% elif total_percentage > 100 %}error{% else %}warning{% endif %}"></div>
+                    <div class="status-text">
+                        {% if total_percentage == 100 %}
+                            Plan de evaluación completo y válido
+                        {% elif total_percentage > 100 %}
+                            Plan de evaluación excede el 100%
+                        {% else %}
+                            Plan de evaluación incompleto
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="percentage-total {% if total_percentage == 100 %}percentage-valid{% else %}percentage-invalid{% endif %}">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                    {{ total_percentage }}%
+                </div>
+            </div>
+
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card">
+                    <span class="summary-number">{{ activities.count }}</span>
+                    <span class="summary-label">Actividades Totales</span>
+                </div>
+        
+                <div class="summary-card">
+                    <span class="summary-number">{{ comments.count }}</span>
+                    <span class="summary-label">Comentarios</span>
+                </div>
+            </div>
+
+            <!-- Activities Section -->
+            <div class="activities-section">
+                <div class="section-header">
+                    <h2 class="section-title">
+                        <div class="section-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 11H1v3h8v3l3-4-3-4v2z"/>
+                                <path d="M22 12h-6"/>
+                            </svg>
+                        </div>
+                        Actividades de Evaluación
+                    </h2>
+                    {% if can_edit_plan %}
+                    <a href="{% url 'add_activity' subject_code=subject_code group_number=group_number semester=semester %}" 
+                       class="action-button">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2v20m8-10H4"/>
+                        </svg>
+                        Agregar Actividad
+                    </a>
+                    {% endif %}
+                </div>
+
+                {% if activities %}
+                <table class="activities-table">
+                    <thead>
+                        <tr>
+                            <th>Actividad</th>
+                            <th>Descripción</th>
+                            <th>Porcentaje</th>
+                            {% if can_edit_plan %}
+                            <th>Acciones</th>
+                            {% endif %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for activity in activities %}
+                        <tr>
+                            <td data-label="Actividad">
+                                <div class="activity-name">{{ activity.name }}</div>
+                                <div class="activity-type">{{ activity.get_activity_type_display }}</div>
+                            </td>
+                            <td data-label="Descripción">
+                                <div class="activity-description">
+                                    {{ activity.description|default:"Sin descripción" }}
+                                </div>
+                            </td>
+                            <td data-label="Porcentaje" class="percentage-cell">
+                                <span class="{% if activity.percentage >= 30 %}percentage-high{% elif activity.percentage >= 15 %}percentage-medium{% else %}percentage-low{% endif %}">
+                                    {{ activity.percentage }}%
+                                </span>
+                            </td>
+                    
+                            {% if can_edit_plan %}
+                            <td data-label="Acciones" class="actions-cell">
+                                <a href="{% url 'edit_activity' activity_id=activity.id %}" 
+                                   class="table-action btn-edit">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                    Editar
+                                </a>
+                                <a href="{% url 'delete_activity' activity_id=activity.id %}" 
+                                   class="table-action btn-delete"
+                                   onclick="return confirm('¿Estás seguro de eliminar esta actividad?')">
+                                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="3,6 5,6 21,6"/>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/>
+                                        <path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                                    </svg>
+                                    Eliminar
+                                </a>
+                            </td>
+                            {% endif %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="empty-state">
+                    <div class="empty-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11H1v3h8v3l3-4-3-4v2z"/>
+                            <path d="M22 12h-6"/>
+                        </svg>
+                    </div>
+                    <h3>No hay actividades definidas</h3>
+                    <p>Este plan de evaluación aún no tiene actividades configuradas.</p>
+                    {% if can_edit_plan %}
+                    <a href="{% url 'add_activity' subject_code=subject_code group_number=group_number semester=semester %}" 
+                       class="action-button" style="margin-top: 1rem; display: inline-flex;">
+                        Agregar Primera Actividad
+                    </a>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Comments Section -->
+            {% if comments %}
+            <div class="comments-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                    </div>
+                    Comentarios de la Comunidad
+                </h2>
+                
+                {% for comment in comments %}
+                <div class="comment-item">
+                    <div class="comment-header">
+                        <span class="comment-author">{{ comment.author_name }}</span>
+                        <span class="comment-date">{{ comment.created_at|date:"d/m/Y H:i" }}</span>
+                    </div>
+                    <div class="comment-text">{{ comment.comment }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+        <div id="add-comment-section" style="margin-top: 1.5rem;">
+            <h3>Nuevo Comentario</h3>
+            <textarea id="comment-text" placeholder="Escribe tu comentario aquí..." rows="4" style="width: 100%; border-radius: 5px; padding: 0.5rem;"></textarea>
+            <button id="submit-comment" class="action-button secondary" style="margin-top: 1rem; display: inline-flex; align-items: center;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin-right: 6px;">
+                    <path d="M12 2v20m8-10H4"/>
+                </svg>
+                Agregar Comentario
+            </button>
+            <p id="comment-error" style="color:red; margin-top: 0.5rem;"></p>
+        </div>
+
+
+        {% else %}
+            <!-- No Plan State -->
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                </div>
+                <h2>No hay plan de evaluación definido</h2>
+                <p>Este grupo aún no tiene un plan de evaluación configurado. Puedes crear uno para ayudar a la comunidad.</p>
+                <a href="{% url 'create_evaluation_plan' subject_code=subject_code group_number=group_number semester=semester %}" 
+                   class="action-button" style="margin-top: 1.5rem; display: inline-flex;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20m8-10H4"/>
+                    </svg>
+                    Crear Plan de Evaluación
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Animaciones y funcionalidades interactivas
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animación de entrada para las tarjetas
+            const cards = document.querySelectorAll('.summary-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Highlight de porcentajes según valor
+            const percentageCells = document.querySelectorAll('.percentage-cell span');
+            percentageCells.forEach(cell => {
+                const value = parseInt(cell.textContent);
+                if (value >= 30) {
+                    cell.style.background = '#fee2e2';
+                    cell.style.padding = '4px 8px';
+                    cell.style.borderRadius = '6px';
+                } else if (value >= 15) {
+                    cell.style.background = '#fef3c7';
+                    cell.style.padding = '4px 8px';
+                    cell.style.borderRadius = '6px';
+                }
+            });
+
+            // Confirmación para acciones destructivas
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (!confirm('¿Estás seguro de que deseas eliminar esta actividad? Esta acción no se puede deshacer.')) {
+                        e.preventDefault();
+                    }
+                });
+            });
+
+            // Tooltip para porcentajes
+            const percentageElements = document.querySelectorAll('.percentage-cell');
+            percentageElements.forEach(element => {
+                element.addEventListener('mouseenter', function() {
+                    const percentage = parseInt(this.textContent);
+                    let message = '';
+                    
+                    if (percentage >= 30) {
+                        message = 'Actividad de alto impacto';
+                    } else if (percentage >= 15) {
+                        message = 'Actividad de impacto medio';
+                    } else {
+                        message = 'Actividad de bajo impacto';
+                    }
+                    
+                    this.title = message;
+                });
+            });
+        });
+
+        // Función para validar porcentaje total
+        function validateTotalPercentage() {
+            const total = {{ total_percentage }};
+            const statusIndicator = document.querySelector('.status-indicator');
+            const statusText = document.querySelector('.status-text');
+            const percentageTotal = document.querySelector('.percentage-total');
+            
+            if (total === 100) {
+                statusIndicator.className = 'status-indicator';
+                statusText.textContent = 'Plan de evaluación completo y válido';
+                percentageTotal.className = 'percentage-total percentage-valid';
+            } else if (total > 100) {
+                statusIndicator.className = 'status-indicator error';
+                statusText.textContent = 'Plan de evaluación excede el 100%';
+                percentageTotal.className = 'percentage-total percentage-invalid';
+            } else {
+                statusIndicator.className = 'status-indicator warning';
+                statusText.textContent = 'Plan de evaluación incompleto';
+                percentageTotal.className = 'percentage-total percentage-invalid';
+            }
+        }
+    </script>
+
+    <script>
+document.getElementById('submit-comment').addEventListener('click', async () => {
+    const commentText = document.getElementById('comment-text').value.trim();
+    const errorField = document.getElementById('comment-error');
+    errorField.textContent = "";
+
+    if (!commentText) {
+        errorField.textContent = "El comentario no puede estar vacío.";
+        return;
+    }
+
+    try {
+        const response = await fetch("{% url 'notas:add_comment' subject_code=subject_code group_number=group_number semester=semester %}", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRFToken": "{{ csrf_token }}"
+            },
+            body: JSON.stringify({ comment: commentText })
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            location.reload(); // Recargar para mostrar el nuevo comentario
+        } else {
+            errorField.textContent = result.error || "Error al agregar comentario.";
+        }
+    } catch (err) {
+        console.error(err);
+        errorField.textContent = "Error inesperado.";
+    }
+});
+</script>
+
+</body>
+</html>

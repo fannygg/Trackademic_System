@@ -34,7 +34,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             height: 70px;
         }
@@ -67,422 +67,277 @@
             background-clip: text;
         }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-            align-items: center;
-        }
-
-        .nav-menu a {
-            text-decoration: none;
-            color: #6b7280;
-            font-weight: 500;
-            padding: 8px 16px;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+        .user-section {
             display: flex;
             align-items: center;
-            gap: 8px;
-        }
-
-        .nav-menu a:hover {
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .nav-menu a.active {
-            color: #667eea;
-            background: rgba(102, 126, 234, 0.15);
-        }
-
-        .user-menu {
-            position: relative;
-        }
-
-        .user-button {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 8px 16px;
-            background: rgba(102, 126, 234, 0.1);
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .user-button:hover {
-            background: rgba(102, 126, 234, 0.2);
-        }
-
-        .user-avatar {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 14px;
+            gap: 1rem;
         }
 
         .user-info {
-            text-align: left;
+            text-align: right;
         }
 
         .user-name {
             font-weight: 600;
             color: #1f2937;
-            font-size: 0.9rem;
         }
 
         .user-role {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: #6b7280;
         }
 
-        .dropdown-menu {
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
-            padding: 8px;
-            min-width: 200px;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .dropdown-menu.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-
-        .dropdown-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
+        .logout-btn {
+            padding: 8px 16px;
+            background: #ef4444;
+            color: white;
             text-decoration: none;
-            color: #374151;
             border-radius: 8px;
-            transition: all 0.2s ease;
+            font-weight: 500;
+            transition: all 0.3s ease;
         }
 
-        .dropdown-item:hover {
-            background: #f3f4f6;
-            color: #667eea;
-        }
-
-        .dropdown-divider {
-            height: 1px;
-            background: #e5e7eb;
-            margin: 8px 0;
+        .logout-btn:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
         }
 
         /* Main Content */
         .main-container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 2rem;
-            display: grid;
-            grid-template-columns: 280px 1fr;
-            gap: 2rem;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 1.5rem;
-            height: fit-content;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 90px;
-        }
-
-        .sidebar-section {
-            margin-bottom: 2rem;
-        }
-
-        .sidebar-title {
-            font-size: 0.9rem;
-            font-weight: 600;
-            color: #6b7280;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 1rem;
-        }
-
-        .sidebar-menu {
-            list-style: none;
-        }
-
-        .sidebar-menu li {
-            margin-bottom: 4px;
-        }
-
-        .sidebar-menu a {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            text-decoration: none;
-            color: #6b7280;
-            border-radius: 10px;
-            transition: all 0.3s ease;
-            font-weight: 500;
-        }
-
-        .sidebar-menu a:hover {
-            background: rgba(102, 126, 234, 0.1);
-            color: #667eea;
-            transform: translateX(4px);
-        }
-
-        .sidebar-menu a.active {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-        }
-
-        /* Content Area */
-        .content {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
         }
 
         .welcome-section {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 2rem;
-            border-radius: 16px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .welcome-section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 200px;
-            height: 200px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            transform: translate(50%, -50%);
-        }
-
-        .welcome-content {
-            position: relative;
-            z-index: 1;
+            text-align: center;
+            margin-bottom: 3rem;
         }
 
         .welcome-title {
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
         }
 
         .welcome-subtitle {
+            color: #6b7280;
             font-size: 1.1rem;
-            opacity: 0.9;
-            margin-bottom: 1.5rem;
         }
 
+        /* Quick Stats */
         .quick-stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
         }
 
-        .stat-item {
-            text-align: center;
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 12px;
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .stat-number {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             display: block;
         }
 
         .stat-label {
+            color: #6b7280;
             font-size: 0.9rem;
-            opacity: 0.8;
+            margin-top: 0.5rem;
         }
 
-        /* Feature Cards */
-        .features-grid {
+        /* Main Functions Grid */
+        .functions-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
+            gap: 2rem;
+            margin-bottom: 3rem;
         }
 
-        .feature-card {
+        .function-section {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 16px;
-            padding: 1.5rem;
+            padding: 2rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .feature-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-            color: white;
-        }
-
-        .feature-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: #1f2937;
-        }
-
-        .feature-description {
-            color: #6b7280;
-            margin-bottom: 1rem;
-            line-height: 1.5;
-        }
-
-        .feature-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 16px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-
-        .feature-button:hover {
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-        }
-
-        /* Recent Activity */
-        .recent-activity {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         .section-title {
             font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1rem;
             color: #1f2937;
-        }
-
-        .activity-list {
-            list-style: none;
-        }
-
-        .activity-item {
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 0;
-            border-bottom: 1px solid #f3f4f6;
+            gap: 10px;
         }
 
-        .activity-item:last-child {
-            border-bottom: none;
-        }
-
-        .activity-icon {
+        .section-icon {
             width: 35px;
             height: 35px;
-            background: rgba(102, 126, 234, 0.1);
+            background: linear-gradient(135deg, #667eea, #764ba2);
             border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #667eea;
+            color: white;
         }
 
-        .activity-content {
-            flex: 1;
+        .function-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
         }
 
-        .activity-title {
-            font-weight: 500;
+        .function-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 10px;
+            text-decoration: none;
             color: #1f2937;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .function-link:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.2);
+            transform: translateX(4px);
+        }
+
+        .link-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .link-title {
+            font-weight: 500;
             margin-bottom: 2px;
         }
 
-        .activity-time {
+        .link-description {
             font-size: 0.85rem;
             color: #6b7280;
         }
 
-        /* Mobile Responsive */
-        @media (max-width: 1024px) {
+        .link-arrow {
+            color: #667eea;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-button {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .action-button.secondary {
+            background: #f3f4f6;
+            color: #374151;
+        }
+
+        .action-button.secondary:hover {
+            background: #e5e7eb;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-icon {
+            width: 24px;
+            height: 24px;
+            flex-shrink: 0;
+        }
+
+        .action-content {
+            flex: 1;
+        }
+
+        .action-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .action-subtitle {
+            font-size: 0.85rem;
+            opacity: 0.8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
             .main-container {
-                grid-template-columns: 1fr;
                 padding: 1rem;
             }
 
-            .sidebar {
-                position: static;
-                order: 2;
+            .welcome-title {
+                font-size: 2rem;
             }
 
-            .nav-menu {
-                display: none;
+            .functions-grid {
+                grid-template-columns: 1fr;
             }
-        }
 
-        @media (max-width: 768px) {
+            .quick-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .actions-grid {
+                grid-template-columns: 1fr;
+            }
+
             .header-content {
                 padding: 0 1rem;
             }
 
             .user-info {
                 display: none;
-            }
-
-            .welcome-title {
-                font-size: 1.5rem;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .quick-stats {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -498,21 +353,13 @@
             }
         }
 
-        .feature-card {
+        .function-section {
             animation: fadeInUp 0.6s ease-out;
         }
 
-        .feature-card:nth-child(2) {
-            animation-delay: 0.1s;
-        }
-
-        .feature-card:nth-child(3) {
-            animation-delay: 0.2s;
-        }
-
-        .feature-card:nth-child(4) {
-            animation-delay: 0.3s;
-        }
+        .function-section:nth-child(2) { animation-delay: 0.1s; }
+        .function-section:nth-child(3) { animation-delay: 0.2s; }
+        .function-section:nth-child(4) { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
@@ -524,321 +371,287 @@
                 <span class="logo-text">Trackademic</span>
             </div>
 
-            <nav>
-                <ul class="nav-menu">
-                    <li><a href="{% url 'home' %}" class="active">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        </svg>
-                        Dashboard
-                    </a></li>
-                    <li><a href="{% url 'grades' %}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 3v18h18"/>
-                            <path d="m19 9-5 5-4-4-3 3"/>
-                        </svg>
-                        Notas
-                    </a></li>
-                    <li><a href="{% url 'subjects' %}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                        </svg>
-                        Materias
-                    </a></li>
-                </ul>
-            </nav>
-
-            <div class="user-menu">
-                <button class="user-button" onclick="toggleDropdown()">
-                    <div class="user-avatar">
-                        {{ user.first_name.0|upper }}{{ user.last_name.0|upper }}
-                    </div>
-                    <div class="user-info">
-                        <div class="user-name">{{ user.first_name }} {{ user.last_name }}</div>
-                        <div class="user-role">Estudiante</div>
-                    </div>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="m6 9 6 6 6-6"/>
-                    </svg>
-                </button>
-
-                <div class="dropdown-menu" id="userDropdown">
-                    <a href="{% url 'profile' %}" class="dropdown-item">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                            <circle cx="12" cy="7" r="4"/>
-                        </svg>
-                        Mi Perfil
-                    </a>
-                    <a href="{% url 'settings' %}" class="dropdown-item">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="3"/>
-                            <path d="M12 1v6m0 6v6"/>
-                        </svg>
-                        Configuración
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="{% url 'logout' %}" class="dropdown-item">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
-                            <polyline points="16,17 21,12 16,7"/>
-                            <line x1="21" y1="12" x2="9" y2="12"/>
-                        </svg>
-                        Cerrar Sesión
-                    </a>
+            <div class="user-section">
+                <div class="user-info">
+                    <div class="user-name">{{ user.first_name }} {{ user.last_name }}</div>
+                    <div class="user-role">Estudiante</div>
                 </div>
+                <a href="{% url 'logout' %}" class="logout-btn">Cerrar Sesión</a>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <div class="main-container">
-        <!-- Sidebar -->
-        <aside class="sidebar">
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">Navegación</h3>
-                <ul class="sidebar-menu">
-                    <li><a href="{% url 'home' %}" class="active">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                        </svg>
-                        Dashboard
-                    </a></li>
-                    <li><a href="{% url 'grades' %}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 3v18h18"/>
-                            <path d="m19 9-5 5-4-4-3 3"/>
-                        </svg>
-                        Mis Notas
-                    </a></li>
-                    <li><a href="{% url 'subjects' %}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1 class="welcome-title">¡Hola, {{ user.first_name }}!</h1>
+            <p class="welcome-subtitle">Gestiona tus notas y planes de evaluación</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <span class="stat-number">{{ current_semester_subjects|default:"0" }}</span>
+                <span class="stat-label">Materias Actuales</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ total_grades|default:"0" }}</span>
+                <span class="stat-label">Notas Registradas</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ current_average|default:"0.0" }}</span>
+                <span class="stat-label">Promedio Actual</span>
+            </div>
+        </div>
+
+        <!-- Main Functions -->
+        <div class="functions-grid">
+            <!-- Gestión de Cursos -->
+            <div class="function-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
                             <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
                         </svg>
-                        Materias
-                    </a></li>
-                    <li><a href="{% url 'calendar' %}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-                            <line x1="16" y1="2" x2="16" y2="6"/>
-                            <line x1="8" y1="2" x2="8" y2="6"/>
-                            <line x1="3" y1="10" x2="21" y2="10"/>
-                        </svg>
-                        Calendario
-                    </a></li>
-                </ul>
-            </div>
-
-            <div class="sidebar-section">
-                <h3 class="sidebar-title">Herramientas</h3>
-                <ul class="sidebar-menu">
-                    <li><a href="{% url 'calculator' %}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="4" y="2" width="16" height="20" rx="2"/>
-                            <line x1="8" y1="6" x2="16" y2="6"/>
-                            <line x1="8" y1="10" x2="16" y2="10"/>
-                            <line x1="8" y1="14" x2="16" y2="14"/>
-                            <line x1="8" y1="18" x2="16" y2="18"/>
-                        </svg>
-                        Calculadora
-                    </a></li>
-                    <li><a href="{% url 'reports' %}">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14,2 14,8 20,8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                            <polyline points="10,9 9,9 8,9"/>
-                        </svg>
-                        Reportes
-                    </a></li>
-                </ul>
-            </div>
-        </aside>
-
-        <!-- Content -->
-        <main class="content">
-            <!-- Welcome Section -->
-            <section class="welcome-section">
-                <div class="welcome-content">
-                    <h1 class="welcome-title">¡Hola, {{ user.first_name }}!</h1>
-                    <p class="welcome-subtitle">Bienvenido de vuelta a tu dashboard académico</p>
-                    
-                    <div class="quick-stats">
-                        <div class="stat-item">
-                            <span class="stat-number">4.2</span>
-                            <span class="stat-label">Promedio</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">8</span>
-                            <span class="stat-label">Materias</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">15</span>
-                            <span class="stat-label">Evaluaciones</span>
-                        </div>
-                        <div class="stat-item">
-                            <span class="stat-number">92%</span>
-                            <span class="stat-label">Progreso</span>
-                        </div>
                     </div>
-                </div>
-            </section>
-
-            <!-- Features Grid -->
-            <section class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M3 3v18h18"/>
-                            <path d="m19 9-5 5-4-4-3 3"/>
+                    Cursos y Materias
+                </h2>
+                <div class="function-links">
+                    <a href="{% url 'subjects' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Ver Cursos por Semestre</div>
+                            <div class="link-description">Explora materias disponibles por grupo y profesor</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 18 6-6-6-6"/>
                         </svg>
-                    </div>
-                    <h3 class="feature-title">Seguimiento de Notas</h3>
-                    <p class="feature-description">Registra y monitorea todas tus calificaciones en tiempo real.</p>
-                    <a href="{% url 'grades' %}" class="feature-button">
-                        Ver Notas
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    </a>
+                    <a href="{% url 'my_courses' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Mis Cursos Inscritos</div>
+                            <div class="link-description">Gestiona tus materias del semestre actual</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </a>
+                    <a href="{% url 'enroll_courses' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Inscribir Materias</div>
+                            <div class="link-description">Inscríbete a nuevos cursos y grupos</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
                 </div>
+            </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <!-- Gestión de Notas -->
+            <div class="function-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 3v18h18"/>
+                            <path d="m19 9-5 5-4-4-3 3"/>
+                        </svg>
+                    </div>
+                    Gestión de Notas
+                </h2>
+                <div class="function-links">
+                    <a href="{% url 'grades' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Ver Mis Notas</div>
+                            <div class="link-description">Consulta todas tus calificaciones</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </a>
+                    <a href="{% url 'add_grade' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Registrar Nueva Nota</div>
+                            <div class="link-description">Ingresa calificaciones de actividades</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </a>
+                    <a href="{% url 'semester_report' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Consolidado por Semestre</div>
+                            <div class="link-description">Resumen de promedios y rendimiento</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Planes de Evaluación -->
+            <div class="function-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="10"/>
                             <circle cx="12" cy="12" r="6"/>
                             <circle cx="12" cy="12" r="2"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Planes Personalizados</h3>
-                    <p class="feature-description">Crea planes de evaluación adaptados a tus necesidades.</p>
-                    <a href="{% url 'plans' %}" class="feature-button">
-                        Crear Plan
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    Planes de Evaluación
+                </h2>
+                <div class="function-links">
+                    <a href="{% url 'evaluation_plans' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Ver Planes de Evaluación</div>
+                            <div class="link-description">Consulta actividades y porcentajes</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </a>
+                    <a href="{% url 'create_plan' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Crear Plan de Evaluación</div>
+                            <div class="link-description">Define actividades para un curso</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </a>
+                    <a href="{% url 'collaborative_plans' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Planes Colaborativos</div>
+                            <div class="link-description">Comenta y colabora con otros estudiantes</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
                 </div>
+            </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="m22 21-3-3m0 0a2 2 0 0 0-3-3 2 2 0 0 0-3 3 2 2 0 0 0 3 3 2 2 0 0 0 3-3Z"/>
+            <!-- Informes y Análisis -->
+            <div class="function-section">
+                <h2 class="section-title">
+                    <div class="section-icon">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                            <polyline points="14,2 14,8 20,8"/>
+                            <line x1="16" y1="13" x2="8" y2="13"/>
+                            <line x1="16" y1="17" x2="8" y2="17"/>
                         </svg>
                     </div>
-                    <h3 class="feature-title">Colaboración</h3>
-                    <p class="feature-description">Conecta con compañeros y comparte estrategias de estudio.</p>
-                    <a href="{% url 'collaboration' %}" class="feature-button">
-                        Colaborar
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    Informes de Valor
+                </h2>
+                <div class="function-links">
+                    <a href="{% url 'grade_calculator' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Calculadora de Notas</div>
+                            <div class="link-description">¿Qué nota necesitas para aprobar?</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </a>
+                    <a href="{% url 'performance_analysis' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Análisis de Rendimiento</div>
+                            <div class="link-description">¿En qué actividades tienes peor rendimiento?</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="m9 18 6-6-6-6"/>
+                        </svg>
+                    </a>
+                    <a href="{% url 'evolution_report' %}" class="function-link">
+                        <div class="link-info">
+                            <div class="link-title">Evolución Académica</div>
+                            <div class="link-description">Tu progreso por semestre y curso</div>
+                        </div>
+                        <svg class="link-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="m9 18 6-6-6-6"/>
                         </svg>
                     </a>
                 </div>
+            </div>
+        </div>
 
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <rect x="4" y="2" width="16" height="20" rx="2"/>
-                            <line x1="8" y1="6" x2="16" y2="6"/>
-                            <line x1="8" y1="10" x2="16" y2="10"/>
-                            <line x1="8" y1="14" x2="16" y2="14"/>
-                            <line x1="8" y1="18" x2="16" y2="18"/>
-                        </svg>
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2 class="section-title">
+                <div class="section-icon">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20m8-10H4"/>
+                    </svg>
+                </div>
+                Acciones Rápidas
+            </h2>
+            <div class="actions-grid">
+                <a href="{% url 'add_grade' %}" class="action-button">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2v20m8-10H4"/>
+                    </svg>
+                    <div class="action-content">
+                        <div class="action-title">Registrar Nota</div>
+                        <div class="action-subtitle">Ingresa una nueva calificación</div>
                     </div>
-                    <h3 class="feature-title">Calculadora de Notas</h3>
-                    <p class="feature-description">Calcula qué necesitas para alcanzar tus objetivos académicos.</p>
-                    <a href="{% url 'calculator' %}" class="feature-button">
-                        Calcular
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="m9 18 6-6-6-6"/>
-                        </svg>
-                    </a>
-                </div>
-            </section>
+                </a>
 
-            <!-- Recent Activity -->
-            <section class="recent-activity">
-                <h2 class="section-title">Actividad Reciente</h2>
-                <ul class="activity-list">
-                    <li class="activity-item">
-                        <div class="activity-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M20 6 9 17l-5-5"/>
-                            </svg>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">Nota agregada en Matemáticas</div>
-                            <div class="activity-time">Hace 2 horas</div>
-                        </div>
-                    </li>
-                    <li class="activity-item">
-                        <div class="activity-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M12 2v20m8-10H4"/>
-                            </svg>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">Nuevo plan de evaluación creado</div>
-                            <div class="activity-time">Ayer</div>
-                        </div>
-                    </li>
-                    <li class="activity-item">
-                        <div class="activity-icon">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
-                                <circle cx="9" cy="7" r="4"/>
-                                <path d="m22 21-3-3m0 0a2 2 0 0 0-3-3 2 2 0 0 0-3 3 2 2 0 0 0 3 3 2 2 0 0 0 3-3Z"/>
-                            </svg>
-                        </div>
-                        <div class="activity-content">
-                            <div class="activity-title">Colaboración iniciada con Ana García</div>
-                            <div class="activity-time">Hace 3 días</div>
-                        </div>
-                    </li>
-                </ul>
-            </section>
-        </main>
+                <a href="{% url 'grade_calculator' %}" class="action-button">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="4" y="2" width="16" height="20" rx="2"/>
+                        <line x1="8" y1="6" x2="16" y2="6"/>
+                        <line x1="8" y1="10" x2="16" y2="10"/>
+                        <line x1="8" y1="14" x2="16" y2="14"/>
+                    </svg>
+                    <div class="action-content">
+                        <div class="action-title">Calcular Nota Necesaria</div>
+                        <div class="action-subtitle">¿Qué necesitas para aprobar?</div>
+                    </div>
+                </a>
+
+                <a href="{% url 'profile' %}" class="action-button secondary">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <div class="action-content">
+                        <div class="action-title">Mi Perfil</div>
+                        <div class="action-subtitle">Gestiona tu cuenta</div>
+                    </div>
+                </a>
+
+                <a href="{% url 'help' %}" class="action-button secondary">
+                    <svg class="action-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <path d="M12 17h.01"/>
+                    </svg>
+                    <div class="action-content">
+                        <div class="action-title">Ayuda</div>
+                        <div class="action-subtitle">Guías y soporte</div>
+                    </div>
+                </a>
+            </div>
+        </div>
     </div>
 
     <script>
-        function toggleDropdown() {
-            const dropdown = document.getElementById('userDropdown');
-            dropdown.classList.toggle('show');
-        }
-
-        // Cerrar dropdown al hacer click fuera
-        document.addEventListener('click', function(event) {
-            const userMenu = document.querySelector('.user-menu');
-            const dropdown = document.getElementById('userDropdown');
-            
-            if (!userMenu.contains(event.target)) {
-                dropdown.classList.remove('show');
-            }
-        });
-
-        // Animaciones de entrada
+        // Simple animations on load
         document.addEventListener('DOMContentLoaded', function() {
-            const cards = document.querySelectorAll('.feature-card');
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateY(0)';
-                    }
-                });
-            });
-
-            cards.forEach(card => {
+            const cards = document.querySelectorAll('.stat-card');
+            cards.forEach((card, index) => {
                 card.style.opacity = '0';
                 card.style.transform = 'translateY(20px)';
-                observer.observe(card);
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
             });
         });
     </script>

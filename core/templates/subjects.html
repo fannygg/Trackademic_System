@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos Disponibles - Trackademic</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            min-height: 100vh;
+            color: #1f2937;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e5e7eb;
+            padding: 0 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            height: 70px;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .back-button {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(102, 126, 234, 0.2);
+        }
+
+        /* Main Content */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            font-size: 1.1rem;
+        }
+
+        /* Filters */
+        .filters-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .filters-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            align-items: end;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: #374151;
+            font-size: 0.9rem;
+        }
+
+        .filter-select, .filter-input {
+            padding: 12px 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 10px;
+            font-size: 1rem;
+            background: white;
+            transition: all 0.3s ease;
+        }
+
+        .filter-select:focus, .filter-input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .filter-button {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+        }
+
+        .filter-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+        }
+
+        .clear-button {
+            background: #6b7280;
+        }
+
+        .clear-button:hover {
+            background: #4b5563;
+        }
+
+        /* Stats */
+        .stats-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+
+        .stat-label {
+            color: #6b7280;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Semester Sections */
+        .semester-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .semester-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .semester-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .semester-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .semester-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .semester-count {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+
+        .semester-toggle {
+            transition: transform 0.3s ease;
+        }
+
+        .semester-toggle.collapsed {
+            transform: rotate(-90deg);
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .subjects-grid.collapsed {
+            display: none;
+        }
+
+        /* Subject Cards */
+        .subject-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .subject-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .subject-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .subject-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .subject-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .subject-info {
+            flex: 1;
+        }
+
+        .subject-name {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
+        }
+
+        .subject-code {
+            color: #6b7280;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .subject-details {
+            display: flex;
+            gap: 1rem;
+            font-size: 0.8rem;
+            color: #6b7280;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .groups-section {
+            margin-top: 1rem;
+        }
+
+        .groups-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #6b7280;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .groups-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .group-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 14px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .group-item:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.2);
+            transform: translateX(4px);
+        }
+
+        .group-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+        }
+
+        .group-number {
+            width: 28px;
+            height: 28px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .group-details {
+            flex: 1;
+        }
+
+        .professor-name {
+            font-weight: 500;
+            color: #1f2937;
+            font-size: 0.9rem;
+            margin-bottom: 2px;
+        }
+
+        .professor-info {
+            font-size: 0.75rem;
+            color: #6b7280;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .group-actions {
+            display: flex;
+            gap: 6px;
+        }
+
+        .action-button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .btn-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .action-button:hover {
+            transform: translateY(-1px);
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .status-available {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-full {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .status-enrolled {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #6b7280;
+        }
+
+        .empty-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: #667eea;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #6b7280;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                padding: 1rem;
+            }
+
+            .subjects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+
+            .filters-form {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-section {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .group-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+
+            .group-actions {
+                align-self: stretch;
+                justify-content: space-between;
+            }
+
+            .semester-info {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .subject-card {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="logo">T</div>
+                <span class="logo-text">Trackademic</span>
+            </div>
+
+            <a href="{% url 'home' %}" class="back-button">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="m12 19-7-7 7-7"/>
+                    <path d="M19 12H5"/>
+                </svg>
+                Volver al Dashboard
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1 class="page-title">Cursos Disponibles</h1>
+            <p class="page-subtitle">Explora todas las asignaturas activas por semestre, grupo y profesor</p>
+        </div>
+
+        <!-- Stats Section -->
+        <div class="stats-section">
+            <div class="stat-card">
+                <span class="stat-number">{{ stats.total_semesters }}</span>
+                <span class="stat-label">Semestres Activos</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ stats.total_subjects }}</span>
+                <span class="stat-label">Asignaturas</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ stats.total_groups }}</span>
+                <span class="stat-label">Grupos Disponibles</span>
+            </div>
+            <div class="stat-card">
+                <span class="stat-number">{{ stats.total_professors }}</span>
+                <span class="stat-label">Profesores Activos</span>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-section">
+            <form method="get" action="{% url 'subjects' %}" class="filters-form" id="filtersForm">
+                <div class="filter-group">
+                    <label class="filter-label">Semestre</label>
+                    <select class="filter-select" name="semester" onchange="this.form.submit()">
+                        <option value="">Todos los semestres</option>
+                        {% for semester in available_semesters %}
+                            <option value="{{ semester }}" {% if request.GET.semester == semester %}selected{% endif %}>
+                                {{ semester }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Área de Conocimiento</label>
+                    <select class="filter-select" name="area" onchange="this.form.submit()">
+                        <option value="">Todas las áreas</option>
+                        {% for area in available_areas %}
+                            <option value="{{ area.code }}" {% if request.GET.area == area.code %}selected{% endif %}>
+                                {{ area.name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Profesor</label>
+                    <select class="filter-select" name="professor">
+                        <option value="">Todos los profesores</option>
+                        {% for professor in available_professors %}
+                            <option value="{{ professor.id }}" {% if request.GET.professor == professor.id %}selected{% endif %}>
+                                {{ professor.first_name }} {{ professor.last_name }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label class="filter-label">Buscar Asignatura</label>
+                    <input type="text" class="filter-input" name="search" 
+                           placeholder="Nombre o código..." 
+                           value="{{ request.GET.search }}">
+                </div>
+
+                <div class="filter-group">
+                    <button type="submit" class="filter-button">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        Buscar
+                    </button>
+                </div>
+
+                <div class="filter-group">
+                    <a href="{% url 'subjects' %}" class="filter-button clear-button">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 6h18"/>
+                            <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/>
+                            <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>
+                        </svg>
+                        Limpiar
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <!-- Results -->
+        {% if subjects_by_semester %}
+            <!-- Semester Sections -->
+            {% for semester, subjects in subjects_by_semester.items %}
+            <div class="semester-section" data-semester="{{ semester }}">
+                <div class="semester-header" onclick="toggleSemester('{{ semester }}')">
+                    <div class="semester-info">
+                        <h2 class="semester-title">{{ semester }}</h2>
+                        <span class="semester-count">
+                            {{ subjects|length }} asignatura{{ subjects|length|pluralize:"s" }} • 
+                            {{ subjects|length }} grupo{{ subjects|length|pluralize:"s" }}
+                        </span>
+                    </div>
+                    <svg class="semester-toggle" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                </div>
+                
+                <div class="subjects-grid" id="subjects-{{ semester }}">
+                    {% for subject_data in subjects %}
+                    <div class="subject-card">
+                        <div class="subject-header">
+                            <div class="subject-icon">
+                                {{ subject_data.subject.code|slice:":3"|upper }}
+                            </div>
+                            <div class="subject-info">
+                                <h3 class="subject-name">{{ subject_data.subject.name }}</h3>
+                                <p class="subject-code">{{ subject_data.subject.code }}</p>
+                                <div class="subject-details">
+                        
+                                    <div class="detail-item">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                                        </svg>
+                                        {{ subject_data.subject.area.name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="groups-section">
+                            <h4 class="groups-title">
+                                Grupos Disponibles ({{ subject_data.groups|length }})
+                            </h4>
+                            <div class="groups-list">
+                                {% for group in subject_data.groups %}
+                                <div class="group-item" onclick="selectGroup('{{ subject_data.subject.code }}', {{ group.number }}, '{{ semester }}')">
+                                    <div class="group-info">
+                                        <div class="group-number">{{ group.number }}</div>
+                                        <div class="group-details">
+                                            <div class="professor-name">
+                                                {{ group.professor.first_name }} {{ group.professor.last_name }}
+                                            </div>
+                                            <div class="professor-info">
+                                                <span>ID: {{ group.professor_id }}</span>
+                                                {% if group.schedule %}
+                                                    <span>{{ group.schedule }}</span>
+                                                {% endif %}
+                                                {% if group.classroom %}
+                                                    <span>Aula: {{ group.classroom }}</span>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="group-actions">
+                                        <!-- Status indicator -->
+                                        {% if group.is_enrolled %}
+                                            <span class="status-indicator status-enrolled">
+                                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M20 6 9 17l-5-5"/>
+                                                </svg>
+                                                Inscrito
+                                            </span>
+       
+                                        {% endif %}
+
+                                        <!-- Action buttons -->
+                                        <a href="{% url 'notas:evaluation_plan_detail' subject_code=subject_data.subject.code group_number=group.number semester=semester %}" 
+                                           class="action-button btn-primary" onclick="event.stopPropagation()">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                                <circle cx="12" cy="12" r="3"/>
+                                            </svg>
+                                            Ver Planes de Evaluación
+                                        </a>
+                                        <!--Borrar despues-->
+                                        <a href="{% url 'notas:evaluation_plan_detail' subject_code=subject_data.subject.code group_number=group.number semester=semester %}" 
+                                           class="action-button btn-primary" onclick="event.stopPropagation()">
+                                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                                <circle cx="12" cy="12" r="3"/>
+                                            </svg>
+                                            Ver Plan
+                                        </a>
+                                        
+                                        {% if not group.is_enrolled and group.available_spots > 0 %}
+                                            <a href="{% url 'enroll_group' subject_code=subject_data.subject.code group_number=group.number semester=semester %}" 
+                                               class="action-button btn-success" onclick="event.stopPropagation()">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M12 2v20m8-10H4"/>
+                                                </svg>
+                                                Inscribir
+                                            </a>
+                                        {% elif group.is_enrolled %}
+                                            <a href="{% url 'my_grades' subject_code=subject_data.subject.code group_number=group.number semester=semester %}" 
+                                               class="action-button btn-secondary" onclick="event.stopPropagation()">
+                                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <path d="M3 3v18h18"/>
+                                                    <path d="m19 9-5 5-4-4-3 3"/>
+                                                </svg>
+                                                Mis Notas
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                                {% empty %}
+                                <div class="empty-state">
+                                    <p>No hay grupos disponibles para esta asignatura.</p>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <!-- Empty State -->
+            <div class="empty-state">
+                <div class="empty-icon">
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </div>
+                <h3>No se encontraron asignaturas</h3>
+                <p>Intenta ajustar los filtros para encontrar las asignaturas que buscas.</p>
+                <a href="{% url 'subjects' %}" class="filter-button" style="margin-top: 1rem; display: inline-flex;">
+                    Mostrar todas las asignaturas
+                </a>
+            </div>
+        {% endif %}
+    </div>
+
+    <script>
+        // Toggle semester sections
+        function toggleSemester(semesterId) {
+            const subjectsGrid = document.getElementById(`subjects-${semesterId}`);
+            const toggle = document.querySelector(`[data-semester="${semesterId}"] .semester-toggle`);
+            
+            if (subjectsGrid && toggle) {
+                subjectsGrid.classList.toggle('collapsed');
+                toggle.classList.toggle('collapsed');
+            }
+        }
+
+        // Select group function for analytics
+        function selectGroup(subjectCode, groupNumber, semester) {
+            console.log(`Grupo seleccionado: ${subjectCode} - Grupo ${groupNumber} - ${semester}`);
+            // Aquí puedes agregar analytics o tracking
+        }
+
+        // Auto-submit form on select change
+        document.addEventListener('DOMContentLoaded', function() {
+            const selectElements = document.querySelectorAll('.filter-select');
+            selectElements.forEach(select => {
+                if (select.name !== 'professor') { // Exclude professor select from auto-submit
+                    select.addEventListener('change', function() {
+                        this.form.submit();
+                    });
+                }
+            });
+
+            // Add animation delays to cards
+            const cards = document.querySelectorAll('.subject-card');
+            cards.forEach((card, index) => {
+                card.style.animationDelay = `${(index % 6) * 0.1}s`;
+            });
+
+            // Search input debounce
+            const searchInput = document.querySelector('input[name="search"]');
+            if (searchInput) {
+                let timeout;
+                searchInput.addEventListener('input', function() {
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        this.form.submit();
+                    }, 500);
+                });
+            }
+        });
+
+        // Prevent form submission on action button clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.action-button')) {
+                e.stopPropagation();
+            }
+        });
+
+        // Loading state for form submissions
+        document.getElementById('filtersForm').addEventListener('submit', function() {
+            const button = this.querySelector('.filter-button');
+            button.innerHTML = '<div class="spinner" style="width: 16px; height: 16px; margin: 0;"></div> Buscando...';
+            button.disabled = true;
+        });
+    </script>
+</body>
+</html>

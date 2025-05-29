@@ -61,6 +61,12 @@ class Faculty(models.Model):
     class Meta:
         managed = False
         db_table = 'faculties'
+        
+    def get_dean(self):
+        from yourapp.models import Employee
+        if self.dean_id:
+            return Employee.objects.filter(id=self.dean_id).first()
+        return None
 
 class Campus(models.Model):
     code = models.IntegerField(primary_key=True)
@@ -95,6 +101,10 @@ class Area(models.Model):
     class Meta:
         managed = False
         db_table = 'areas'
+        
+    def get_coordinator(self):
+        from .models import Employee
+        return Employee.objects.filter(id=self.coordinator_id).first()
 
 class Program(models.Model):
     code = models.IntegerField(primary_key=True)
@@ -115,12 +125,31 @@ class Subject(models.Model):
         db_table = 'subjects'
 
 class Group(models.Model):
+    id = models.AutoField(primary_key=True)  # Django necesita una PK
     number = models.IntegerField()
     semester = models.CharField(max_length=6)
     subject_code = models.ForeignKey(Subject, on_delete=models.DO_NOTHING, db_column='subject_code')
-    professor_id = models.CharField(max_length=15)  # FK a Employees.id, char para evitar ciclos
+    professor_id = models.CharField(max_length=15)
 
     class Meta:
         managed = False
         db_table = 'groups'
         unique_together = (('number', 'subject_code', 'semester'),)
+
+    def get_professor(self):
+        if not hasattr(self, '_cached_professor'):
+            from .models import Employee
+            self._cached_professor = Employee.objects.filter(id=self.professor_id).first()
+        return self._cached_professor
+
+class Enrollment(models.Model):
+    id = models.AutoField(primary_key=True)  # Django necesita una PK
+    student = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)  # FK real y directa
+    
+    enrolled_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        managed= True
+        db_table = 'enrollments'
+        unique_together = (('student', 'group'),)
